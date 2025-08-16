@@ -30,7 +30,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 flex items-center justify-center min-h-screen">
+<body class="bg-slate-100 text-slate-800 flex items-center justify-center min-h-screen p-4">
 
     <div id="app-container" class="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-8 md:p-12">
 
@@ -79,7 +79,7 @@
 
         <!-- Page 3: Exam -->
         <div id="exam-page" class="hidden">
-            <div class="flex justify-between items-center mb-6 border-b pb-4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4 gap-4">
                 <div>
                     <h2 id="exam-title" class="text-2xl font-bold text-slate-900"></h2>
                     <p class="text-slate-500">Question <span id="current-q-number">1</span> of <span id="total-q-number"></span></p>
@@ -94,23 +94,23 @@
                 </div>
             </div>
 
-            <div class="mt-8 flex justify-between items-center">
-                <button id="prev-btn" class="bg-slate-200 text-slate-800 font-bold py-2 px-6 rounded-lg hover:bg-slate-300 transition disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
-                <button id="next-btn" class="bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-700 transition disabled:opacity-50">Next</button>
-                <button id="submit-btn" class="hidden bg-green-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-700 transition">Submit Exam</button>
+            <div class="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <button id="prev-btn" class="w-full sm:w-auto bg-slate-200 text-slate-800 font-bold py-2 px-6 rounded-lg hover:bg-slate-300 transition disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+                <button id="next-btn" class="w-full sm:w-auto bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-700 transition disabled:opacity-50">Next</button>
+                <button id="submit-btn" class="w-full sm:w-auto hidden bg-green-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-700 transition">Submit Exam</button>
             </div>
         </div>
 
         <!-- Page 4: Results -->
         <div id="results-page" class="hidden text-center">
-            <h1 class="text-4xl font-bold text-slate-900 mb-2">Exam Completed!</h1>
-            <p id="results-message" class="text-2xl font-semibold mb-4"></p>
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">Exam Completed!</h1>
+            <p id="results-message" class="text-xl sm:text-2xl font-semibold mb-4"></p>
             <p class="text-slate-600 mb-4">Student Name: <span id="results-student-name" class="font-semibold"></span></p>
             <p class="text-slate-500 mb-8">Here is your score for the <span id="results-exam-title" class="font-semibold"></span>.</p>
             
-            <div class="bg-indigo-50 border-2 border-indigo-200 rounded-2xl p-8 max-w-md mx-auto mb-8">
+            <div class="bg-indigo-50 border-2 border-indigo-200 rounded-2xl p-6 sm:p-8 max-w-md mx-auto mb-8">
                 <p class="text-lg text-indigo-800 mb-2">Your Final Score</p>
-                <p id="final-score" class="text-7xl font-bold text-indigo-600">0%</p>
+                <p id="final-score" class="text-6xl sm:text-7xl font-bold text-indigo-600">0%</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-lg mx-auto text-lg">
@@ -302,7 +302,7 @@
                 if (question.options) {
                     question.options.forEach((option, optIndex) => {
                         const optionWrapper = document.createElement('div');
-                        optionWrapper.className = 'flex items-center justify-between bg-white border border-slate-200 rounded-lg p-4';
+                        optionWrapper.className = 'flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white border border-slate-200 rounded-lg p-4 gap-4';
                         
                         const optionText = document.createElement('p');
                         optionText.className = 'flex-1 text-lg';
@@ -310,7 +310,7 @@
                         optionText.innerHTML = `<span class="font-bold mr-2">${letter}.</span> ${option.text}`;
                         
                         const buttonGroup = document.createElement('div');
-                        buttonGroup.className = 'flex items-center space-x-2';
+                        buttonGroup.className = 'flex items-center space-x-2 self-end sm:self-center';
 
                         const trueBtn = createOptionButton('True', 'true', currentQuestionIndex, optIndex);
                         const falseBtn = createOptionButton('False', 'false', currentQuestionIndex, optIndex);
@@ -444,10 +444,10 @@
                 const resultsMessageEl = document.getElementById('results-message');
                 if (score >= 50) {
                     resultsMessageEl.textContent = 'Congratulations, you passed!';
-                    resultsMessageEl.className = 'text-2xl font-semibold mb-4 text-green-600';
+                    resultsMessageEl.className = 'text-xl sm:text-2xl font-semibold mb-4 text-green-600';
                 } else {
                     resultsMessageEl.textContent = 'Unfortunately, you did not meet the passing grade.';
-                    resultsMessageEl.className = 'text-2xl font-semibold mb-4 text-red-600';
+                    resultsMessageEl.className = 'text-xl sm:text-2xl font-semibold mb-4 text-red-600';
                 }
 
                 document.getElementById('results-student-name').textContent = studentProfile.fullName;
