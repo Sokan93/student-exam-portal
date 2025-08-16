@@ -104,6 +104,7 @@
         <!-- Page 4: Results -->
         <div id="results-page" class="hidden text-center">
             <h1 class="text-4xl font-bold text-slate-900 mb-2">Exam Completed!</h1>
+            <p id="results-message" class="text-2xl font-semibold mb-4"></p>
             <p class="text-slate-600 mb-4">Student Name: <span id="results-student-name" class="font-semibold"></span></p>
             <p class="text-slate-500 mb-8">Here is your score for the <span id="results-exam-title" class="font-semibold"></span>.</p>
             
@@ -440,6 +441,15 @@
             }
 
             function displayResults(score, correct, wrong, skipped) {
+                const resultsMessageEl = document.getElementById('results-message');
+                if (score >= 50) {
+                    resultsMessageEl.textContent = 'Congratulations, you passed!';
+                    resultsMessageEl.className = 'text-2xl font-semibold mb-4 text-green-600';
+                } else {
+                    resultsMessageEl.textContent = 'Unfortunately, you did not meet the passing grade.';
+                    resultsMessageEl.className = 'text-2xl font-semibold mb-4 text-red-600';
+                }
+
                 document.getElementById('results-student-name').textContent = studentProfile.fullName;
                 document.getElementById('results-exam-title').textContent = currentExam.title;
                 document.getElementById('final-score').textContent = `${score.toFixed(0)}%`;
